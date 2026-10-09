@@ -1,0 +1,36 @@
+{
+  "name": "x402-cow-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A pay-per-quote x402 gateway that resells CoW Protocol quotes to AI agents. MCP server, Claude Skill, and npm SDK included.",
+  "keywords": [
+    "x402",
+    "cow-protocol",
+    "ai-agents",
+    "mcp",
+    "micropayments",
+    "usdc",
+    "defi",
+    "pay-per-call"
+  ],
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "codingsh.eth",
+  "homepage": "https://developerfred.github.io/x402-cow-gateway/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developerfred/x402-cow-gateway"
+  },
+  "packageManager": "pnpm@10.26.2",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "dev:api": "pnpm --filter @codingsh/x402-cow-api dev",
+    "dev:mcp": "pnpm --filter @codingsh/x402-cow-mcp dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

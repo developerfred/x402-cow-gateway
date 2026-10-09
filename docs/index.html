@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>x402 CoW Gateway — Pay-Per-Quote DeFi Swaps for AI Agents | codingsh</title>
+  <meta name="description" content="A pay-per-quote x402 API that gives AI agents instant CoW Protocol swap quotes. No API key, no sign-up — pay $0.002 per quote in USDC on Base. MCP server, Claude Skill, and npm SDK included." />
+  <link rel="canonical" href="https://developerfred.github.io/x402-cow-gateway/" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="codingsh.eth" />
+  <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="x402 CoW Gateway" />
+  <meta property="og:title" content="x402 CoW Gateway — Pay-Per-Quote DeFi Swaps for AI Agents" />
+  <meta property="og:description" content="Instant CoW Protocol swap quotes for AI agents over x402. No API key. Pay per quote in USDC. MCP + Claude Skill + SDK." />
+  <meta property="og:url" content="https://developerfred.github.io/x402-cow-gateway/" />
+  <meta property="og:image" content="https://developerfred.github.io/x402-cow-gateway/og.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="x402 CoW Gateway — Pay-Per-Quote DeFi Swaps for AI Agents" />
+  <meta name="twitter:description" content="Instant CoW Protocol swap quotes for AI agents over x402. No API key. Pay per quote in USDC." />
+  <meta name="twitter:image" content="https://developerfred.github.io/x402-cow-gateway/og.png" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%84%3C/text%3E%3C/svg%3E" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://developerfred.github.io/x402-cow-gateway/#website",
+        "url": "https://developerfred.github.io/x402-cow-gateway/",
+        "name": "x402 CoW Gateway",
+        "description": "Pay-per-quote x402 API giving AI agents instant CoW Protocol swap quotes."
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "x402 CoW Gateway",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.002",
+          "priceCurrency": "USD",
+          "description": "Pay-per-quote in USDC via the x402 protocol."
+        },
+        "author": { "@type": "Person", "name": "codingsh.eth" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the x402 CoW Gateway?",
+            "acceptedAnswer": { "@type": "Answer", "text": "It is a pay-per-quote API that lets AI agents fetch CoW Protocol swap quotes over the x402 protocol — no API key and no sign-up. Agents pay per quote in USDC on Base, Ethereum, or BNB Chain." }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does a quote cost?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Base quotes cost $0.002 each. Premium endpoints such as multi-network best-route and trade simulation cost from $0.005. You pay only for what you call." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need an API key or an account?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. x402 uses HTTP 402 Payment Required. Your agent opens a USDC tab once and every quote afterward is a signature — no key, no account, no gas per request." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I use it from an AI agent?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Connect the MCP server (works with any MCP-compatible agent), install the Claude Skill, or use the npm SDK. All three wrap the x402 payment flow for you." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #ffffff; --fg: #0b0d12; --muted: #5b6472; --card: #f6f7f9;
+      --border: #e6e8ec; --accent: #5b8def; --accent-fg: #ffffff; --code: #f0f2f5;
+      --max: 980px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0d12; --fg: #e8eaee; --muted: #9aa3b2; --card: #14171f;
+        --border: #232833; --accent: #6ea0ff; --accent-fg: #0b0d12; --code: #11141b;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    header {
+      position: sticky; top: 0; backdrop-filter: blur(8px);
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      border-bottom: 1px solid var(--border); z-index: 10;
+    }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    nav .logo { font-weight: 700; font-size: 18px; }
+    nav .links { display: flex; gap: 18px; align-items: center; }
+    nav .links a { color: var(--muted); font-size: 15px; }
+    .btn {
+      display: inline-block; background: var(--accent); color: var(--accent-fg);
+      padding: 10px 18px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer;
+    }
+    .btn:hover { text-decoration: none; opacity: .92; }
+    .btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+    section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    h1 { font-size: clamp(32px, 6vw, 52px); line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.02em; }
+    h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 24px; letter-spacing: -0.01em; }
+    .lede { font-size: clamp(17px, 2.6vw, 21px); color: var(--muted); max-width: 640px; }
+    .pill { display: inline-block; font-size: 13px; color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); padding: 4px 12px; border-radius: 999px; margin-bottom: 20px; font-weight: 600; }
+    .cta { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+    pre { background: var(--code); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; font-size: 14px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+    .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .steps { counter-reset: step; }
+    .steps .card::before { counter-increment: step; content: "Step " counter(step); color: var(--accent); font-weight: 700; font-size: 13px; display: block; margin-bottom: 6px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 14px 12px; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 600; font-size: 14px; }
+    td.price { font-weight: 700; }
+    details { border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; background: var(--card); }
+    summary { font-weight: 600; cursor: pointer; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+    footer { padding: 40px 0; color: var(--muted); font-size: 14px; }
+    footer .note { margin-top: 10px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <span class="logo">🐄 x402 CoW Gateway</span>
+        <span class="links">
+          <a href="#how">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#start">Quickstart</a>
+          <a href="https://github.com/developerfred/x402-cow-gateway" rel="noopener">GitHub</a>
+        </span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero">
+      <div class="wrap">
+        <span class="pill">Built on x402 · powered by CoW Protocol</span>
+        <h1>Pay-per-quote DeFi swaps for AI agents.</h1>
+        <p class="lede">Give your agent instant CoW Protocol swap quotes over the x402 protocol — no API key, no sign-up, no rate-limit emails. Open a USDC tab once, then pay a few tenths of a cent per quote.</p>
+        <div class="cta">
+          <a class="btn" href="#start">Get started</a>
+          <a class="btn ghost" href="https://github.com/developerfred/x402-cow-gateway" rel="noopener">View on GitHub</a>
+        </div>
+        <pre style="margin-top:32px"><code># Any MCP-compatible agent — one command
+npx -y @codingsh/x402-cow-mcp
+
+# or call it directly with the SDK
+import { CowGateway } from "@codingsh/x402-cow";
+const gw = new CowGateway({ wallet });
+const quote = await gw.quote({ network: "base", sellToken, buyToken, from, kind: "sell", sellAmountBeforeFee });</code></pre>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <div class="grid steps">
+          <div class="card"><h3>Open a tab</h3><p>Your agent deposits ~$1 of USDC once via the x402 protocol. The gateway pays the gas. No account, no key.</p></div>
+          <div class="card"><h3>Ask for a quote</h3><p>Request a CoW Protocol quote on any supported network. Each request is settled as a signed voucher — no transaction, no gas per call.</p></div>
+          <div class="card"><h3>Pay per quote</h3><p>You're charged a few tenths of a cent per quote in USDC. Spend only on what your agent actually uses.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <h2>Why agents choose it</h2>
+        <div class="grid">
+          <div class="card"><h3>No keys, no sign-up</h3><p>HTTP 402 Payment Required does the auth. Bots and agents have zero patience for API-key forms — so there aren't any.</p></div>
+          <div class="card"><h3>Every network, one tab</h3><p>Quote on Ethereum, Base, BNB Chain, Arbitrum, Polygon, Gnosis and more. The chain you pay on is independent of the chain you quote.</p></div>
+          <div class="card"><h3>MCP + Skill + SDK</h3><p>Drop-in MCP server for any agent, a Claude Skill, and a typed npm SDK. The x402 payment handshake is wrapped for you.</p></div>
+          <div class="card"><h3>Best execution</h3><p>Quotes come from the CoW Protocol orderbook — MEV-protected, surplus-capturing batch auctions.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="wrap">
+        <h2>Pricing</h2>
+        <p class="lede" style="margin-bottom:24px">Cost-plus on base quotes, value-based on premium endpoints. You pay in USDC per call — no subscription.</p>
+        <table>
+          <thead><tr><th>Endpoint</th><th>What you get</th><th>Price / call</th></tr></thead>
+          <tbody>
+            <tr><td><code>quote</code></td><td>A single CoW Protocol swap quote</td><td class="price">$0.002</td></tr>
+            <tr><td><code>best-route</code></td><td>Quotes across multiple networks, best one returned</td><td class="price">$0.005</td></tr>
+            <tr><td><code>simulate</code></td><td>Quote + execution simulation</td><td class="price">$0.005</td></tr>
+            <tr><td><code>quote-plus</code></td><td>Quote enriched with gas &amp; MEV context</td><td class="price">$0.008</td></tr>
+          </tbody>
+        </table>
+        <p class="note" style="color:var(--muted);font-size:14px;margin-top:16px">Prices are returned live in the x402 <code>PAYMENT-REQUIRED</code> challenge — your agent always sees the price before paying.</p>
+      </div>
+    </section>
+
+    <section id="start">
+      <div class="wrap">
+        <h2>Quickstart</h2>
+        <h3 style="margin-top:0">1 · MCP server (any agent)</h3>
+        <pre><code>{
+  "mcpServers": {
+    "x402-cow": { "command": "npx", "args": ["-y", "@codingsh/x402-cow-mcp"],
+      "env": { "WALLET_PRIVATE_KEY": "0x..." } }
+  }
+}</code></pre>
+        <h3>2 · npm SDK</h3>
+        <pre><code>npm i @codingsh/x402-cow</code></pre>
+        <h3>3 · curl (raw x402)</h3>
+        <pre><code># 1. Ask for the price (returns HTTP 402 + PAYMENT-REQUIRED header)
+curl -i https://gateway.codingsh.dev/api/v1/base/quote -X POST \
+  -H "content-type: application/json" \
+  -d '{"sellToken":"0x...","buyToken":"0x...","from":"0x...","kind":"sell","sellAmountBeforeFee":"1000000000000000000"}'
+
+# 2. Retry with a signed PAYMENT-SIGNATURE header (see docs)</code></pre>
+        <p><a href="https://github.com/developerfred/x402-cow-gateway#readme" rel="noopener">Full documentation on GitHub →</a></p>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <h2>FAQ</h2>
+        <details open><summary>What is x402?</summary><p>x402 is an open payment protocol that puts the long-dormant HTTP 402 "Payment Required" status code to work for machine payments. An agent hits an endpoint, gets a price, pays in stablecoins, and retries — all in one HTTP exchange, no human in the loop.</p></details>
+        <details><summary>Which tokens and networks can I pay with?</summary><p>USDC on Base, Ethereum, or BNB Chain. The network you pay on is independent of the network you request quotes for.</p></details>
+        <details><summary>Is there a free tier?</summary><p>You can inspect payment terms for free. Quotes are pay-per-call. There's no minimum subscription — your $1 tab is spent down one quote at a time.</p></details>
+        <details><summary>Can I self-host the gateway?</summary><p>Yes — the source is public. Commercial self-hosting requires attribution to codingsh and a royalty under the project license. See the LICENSE file.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>Powered by <a href="https://github.com/developerfred/x402-cow-gateway" rel="noopener">codingsh</a> · <strong>codingsh.eth</strong></div>
+      <div class="note">Built on the <a href="https://github.com/coinbase/x402" rel="noopener">x402 protocol</a> and <a href="https://cow.fi" rel="noopener">CoW Protocol</a>. Not affiliated with or endorsed by CoW DAO or Coinbase. Source-available under the codingsh Source-Available License — attribution &amp; royalties apply to commercial use.</div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://developerfred.github.io/x402-cow-gateway/sitemap.xml

@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# env / secrets — NEVER commit the operator wallet key
+.env
+.env.local
+.env.*.local
+*.key
+
+# vercel
+.vercel/
+
+# os / editor
+.DS_Store
+*.log
+.idea/
+.vscode/

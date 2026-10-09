@@ -1,0 +1,128 @@
+codingsh Source-Available License 1.0 (CSAL-1.0)
+
+Copyright (c) 2026 codingsh.eth. All rights reserved.
+
+IMPORTANT: This is NOT an open-source license. It is a source-available
+commercial license. The source code is published for transparency, study, and
+limited free use, but Commercial Use requires attribution AND the payment of
+royalties as set out below.
+
+This document is a template provided for convenience and is NOT legal advice.
+Have it reviewed by qualified legal counsel before relying on it.
+
+-------------------------------------------------------------------------------
+1. DEFINITIONS
+-------------------------------------------------------------------------------
+"Software" means the source code, documentation, and other materials in this
+repository, and any modification or derivative work of them.
+
+"Licensor" means codingsh.eth, the copyright holder.
+
+"You" means the individual or legal entity exercising rights under this License.
+
+"Gross Revenue" means all revenue You (and Your affiliates) earn, directly or
+indirectly, from any product, service, API, or deployment that incorporates,
+embeds, links to, or is derived from the Software — including per-call or
+subscription fees charged to users or agents.
+
+"Commercial Use" means any use of the Software by or for a for-profit entity,
+or any use that generates Gross Revenue, including operating the Software (or a
+derivative) as a hosted or internal service, or redistributing it as part of a
+paid or revenue-generating product.
+
+"Non-Commercial Use" means use solely for personal study, evaluation,
+research, teaching, or internal experimentation that does not generate Gross
+Revenue, AND use by any entity whose total annual Gross Revenue attributable to
+the Software is below the Free Threshold.
+
+"Free Threshold" means USD 10,000 of annual Gross Revenue attributable to the
+Software, per entity.
+
+"Royalty Rate" means five percent (5%) of Gross Revenue attributable to the
+Software, unless a different rate is agreed in a separate written commercial
+agreement with the Licensor.
+
+-------------------------------------------------------------------------------
+2. GRANT OF RIGHTS
+-------------------------------------------------------------------------------
+Subject to Your continuous compliance with this License, the Licensor grants
+You a worldwide, non-exclusive, non-transferable, revocable license to access,
+use, copy, modify, and create derivative works of the Software, and to run and
+distribute it, for both Non-Commercial Use and Commercial Use, provided that:
+
+  (a) for Commercial Use, You comply with the Royalty obligation in Section 4; and
+  (b) in all cases, You comply with the Attribution requirement in Section 3.
+
+-------------------------------------------------------------------------------
+3. ATTRIBUTION (REQUIRED FOR ALL USE)
+-------------------------------------------------------------------------------
+Every copy, deployment, derivative, and user-facing surface of the Software
+(including API documentation, a web UI, a repository README, or an "about"
+screen) MUST display a clear, legible credit substantially in the form:
+
+    "Powered by codingsh — https://github.com/codingsh/x402-cow-gateway
+     (codingsh.eth)"
+
+You MUST NOT remove or obscure any copyright, attribution, or license notice in
+the Software.
+
+-------------------------------------------------------------------------------
+4. ROYALTY (REQUIRED FOR COMMERCIAL USE)
+-------------------------------------------------------------------------------
+For any Commercial Use, You must pay the Licensor the Royalty Rate on all
+Gross Revenue attributable to the Software. Royalties:
+
+  (a) accrue from the first unit of Gross Revenue above the Free Threshold;
+  (b) are payable monthly, within fifteen (15) days of each calendar month's
+      end, in USDC to codingsh.eth (ENS) on a network supported by the x402
+      protocol, OR as otherwise agreed in writing;
+  (c) must be accompanied by a reasonable statement of the Gross Revenue on
+      which the royalty was computed; and
+  (d) are non-refundable.
+
+The Licensor (or its agent) may, no more than once per year and on reasonable
+notice, audit records relevant to royalty computation. Underpayment of more
+than five percent (5%) for any period entitles the Licensor to recover the
+reasonable cost of the audit.
+
+Non-Commercial Use is royalty-free (attribution still required).
+
+-------------------------------------------------------------------------------
+5. RESTRICTIONS
+-------------------------------------------------------------------------------
+You may not: (a) sublicense the Software under terms that remove the
+Attribution or Royalty obligations; (b) use the Licensor's names, trademarks,
+or the "codingsh" mark except as required by Section 3; or (c) represent that
+Your product is endorsed by the Licensor without written permission.
+
+-------------------------------------------------------------------------------
+6. TERMINATION
+-------------------------------------------------------------------------------
+This License terminates automatically if You breach it and do not cure the
+breach within thirty (30) days of notice (or immediately for a breach of
+Section 3 or 4). On termination You must cease all use and distribution of the
+Software. Sections 4 (accrued royalties), 7, and 8 survive termination.
+
+-------------------------------------------------------------------------------
+7. DISCLAIMER OF WARRANTY
+-------------------------------------------------------------------------------
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. The Software facilitates
+on-chain payments; You are solely responsible for wallet security, regulatory
+compliance, and all transactions.
+
+-------------------------------------------------------------------------------
+8. LIMITATION OF LIABILITY
+-------------------------------------------------------------------------------
+IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE, INCLUDING ANY LOSS OF FUNDS.
+
+-------------------------------------------------------------------------------
+9. COMMERCIAL LICENSING
+-------------------------------------------------------------------------------
+For custom terms, a different royalty rate, or an attribution waiver, contact
+the Licensor at codingsh.eth to negotiate a separate written commercial
+agreement, which supersedes the default terms above for the covered use.
