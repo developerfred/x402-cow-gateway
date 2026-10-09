@@ -1,0 +1,37 @@
+{
+  "name": "@codingsh/x402-cow-wallets",
+  "version": "0.1.0",
+  "description": "Smart-wallet providers for the x402 CoW Gateway — Privy and Coinbase CDP server wallets as x402 signing accounts.",
+  "keywords": ["x402", "privy", "coinbase-cdp", "smart-wallet", "ai-agents", "viem"],
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "codingsh.eth",
+  "homepage": "https://developerfred.github.io/x402-cow-gateway/",
+  "repository": { "type": "git", "url": "https://github.com/developerfred/x402-cow-gateway", "directory": "packages/wallets" },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@codingsh/x402-cow": "workspace:*",
+    "viem": "^2.21.0"
+  },
+  "peerDependencies": {
+    "@coinbase/cdp-sdk": "^1.0.0",
+    "@privy-io/node": "^0.35.0"
+  },
+  "peerDependenciesMeta": {
+    "@coinbase/cdp-sdk": { "optional": true },
+    "@privy-io/node": { "optional": true }
+  },
+  "devDependencies": {
+    "@coinbase/cdp-sdk": "^1.58.0",
+    "@privy-io/node": "^0.35.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}

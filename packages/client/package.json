@@ -1,0 +1,28 @@
+{
+  "name": "@codingsh/x402-cow",
+  "version": "0.1.0",
+  "description": "Typed SDK to fetch CoW Protocol swap quotes over the x402 pay-per-quote protocol. Wraps the x402 batch-settlement payment flow.",
+  "keywords": ["x402", "cow-protocol", "defi", "quotes", "usdc", "ai-agents"],
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "codingsh.eth",
+  "homepage": "https://developerfred.github.io/x402-cow-gateway/",
+  "repository": { "type": "git", "url": "https://github.com/developerfred/x402-cow-gateway", "directory": "packages/client" },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@x402/core": "^2.28.0",
+    "@x402/evm": "^2.28.0",
+    "@x402/fetch": "^2.28.0",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

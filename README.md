@@ -45,10 +45,39 @@ Pricing is a pluggable [`FeePolicy`](packages/api/src/pricing.ts) (`flat` · `bp
 packages/
   api/      x402 resource server (deploys to Vercel) — wraps cow.fi, applies the fee policy
   mcp/      MCP server — exposes the gateway as tools for any agent
-  client/   @codingsh/x402-cow — typed SDK that handles the x402 payment flow
+  client/   @codingsh/x402-cow — typed SDK + WalletProvider interface + raw-key wallet
+  wallets/  @codingsh/x402-cow-wallets — Privy & Coinbase CDP smart-wallet providers
   skill/    Claude Skill (SKILL.md + examples)
 docs/       SEO landing page (GitHub Pages, served from /docs)
 ```
+
+## Smart wallets (no raw keys)
+
+An agent never needs to hard-code a private key. The signing account comes from
+a pluggable `WalletProvider`, so x402 payments can be backed by a custodied
+server wallet:
+
+| Provider | Package | Select with |
+|---|---|---|
+| Raw private key | `@codingsh/x402-cow` (`PrivateKeyWallet`) | `WALLET_PROVIDER=private-key` + `WALLET_PRIVATE_KEY` |
+| **Privy** server wallet | `@codingsh/x402-cow-wallets` (`PrivyWallet`) | `WALLET_PROVIDER=privy` + `PRIVY_*` |
+| **Coinbase CDP** server wallet | `@codingsh/x402-cow-wallets` (`CdpWallet`) | `WALLET_PROVIDER=cdp` + `CDP_*` |
+
+```ts
+import { CowGateway } from "@codingsh/x402-cow";
+import { PrivyWallet } from "@codingsh/x402-cow-wallets";
+
+const gw = new CowGateway({
+  wallet: new PrivyWallet({ appId, appSecret, walletId, address }),
+  rpcUrl: process.env.RPC_URL!,
+});
+```
+
+> **Stripe is different.** Stripe's x402 is *merchant-side* settlement — the
+> gateway accepts an agent's payment and settles it to a Stripe balance (via
+> PaymentIntents + temporary deposit addresses). It is **not** a payer wallet,
+> so it lives on the seller/gateway side, not in the smart-wallet layer. Planned
+> as an alternative to a crypto facilitator (see Roadmap).
 
 ## Quickstart
 
@@ -94,13 +123,18 @@ still required.
 
 ## Roadmap
 
-- [ ] `packages/client` — x402 buyer against `x402.cow.fi` (uses `@x402/evm`)
-- [ ] `packages/api` — x402 resource server + fee policy → payout
-- [ ] `packages/mcp` — MCP tools
-- [ ] `packages/skill` — Claude Skill
+- [x] `packages/client` — x402 buyer against `x402.cow.fi` (`@x402/evm` batch-settlement)
+- [x] `packages/api` — x402 resource server (Hono) + pluggable fee policy → codingsh.eth
+- [x] `packages/mcp` — MCP tools (`x402_cow_quote`, `x402_cow_inspect`)
+- [x] `packages/skill` — Claude Skill
+- [x] `packages/wallets` — smart-wallet providers (Privy, Coinbase CDP)
+- [ ] Stripe settlement on the seller side (accept x402, settle to Stripe balance)
+- [ ] Seller leg on `batch-settlement` (per-quote fee viability at scale; v1 uses `exact`)
+- [ ] Premium endpoints live (`best-route`, `simulate`, `quote-plus`)
 - [ ] Atomic fee split via x402 v2 `exact` scheme (`extra.splits`) — pay `codingsh.eth` in the same tx, no sweeping
 - [ ] `$CoW` payment option
 - [ ] Prepaid volume tab with blended discount
+- [ ] Publish `@codingsh/x402-cow` + `@codingsh/x402-cow-mcp` to npm
 
 ## Credits
 
