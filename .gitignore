@@ -9,6 +9,12 @@ dist/
 .env.*.local
 *.key
 
+# x402 payment-channel / tab state
+.x402-state/
+.x402-ops-state/
+.x402-channels/
+.x402-attempts/
+
 # vercel
 .vercel/
 

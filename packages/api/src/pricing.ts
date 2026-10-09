@@ -22,7 +22,7 @@ export const USDC_DECIMALS = 6;
 
 /** Parse a decimal USD string (e.g. "0.002") into atomic USDC units. */
 export function usd(amount: string): bigint {
-  const [whole, frac = ""] = amount.split(".");
+  const [whole = "0", frac = ""] = amount.split(".");
   const fracPadded = (frac + "0".repeat(USDC_DECIMALS)).slice(0, USDC_DECIMALS);
   return BigInt(whole) * 10n ** BigInt(USDC_DECIMALS) + BigInt(fracPadded || "0");
 }
